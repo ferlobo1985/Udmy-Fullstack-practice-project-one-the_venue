@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState, useEffect } from 'react';
 
 import { AppBar, Toolbar, IconButton } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -6,6 +6,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import SideDrawer from './SideDrawer';
 
 const Header = ()=> {
+    const [drawerOpen,setDrawerOpen] = useState(false)
+
+
+    const toggleDrawer = (value) => {
+        setDrawerOpen(value)
+    }
+
 
     return(
         <AppBar
@@ -26,11 +33,15 @@ const Header = ()=> {
             <IconButton 
                 aria-label="Menu"
                 color="inherit"
+                onClick={()=> toggleDrawer(true)}
             >
                 <MenuIcon/>
             </IconButton>
 
-            <SideDrawer/>
+            <SideDrawer
+                open={drawerOpen}
+                onClose={(value)=>toggleDrawer(value) }
+            />
 
 
             </Toolbar>
